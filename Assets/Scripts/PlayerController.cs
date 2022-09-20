@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 0;
     public TextMeshProUGUI countText;
+    public TextMeshProUGUI deathText;
     public GameObject winTextObject;
 
     private Rigidbody rb;
     private int count;
+    private int death;
     private float movementX;
     private float movementY;
 
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if(count >= 18)
+        if(count >= 22)
         {
             winTextObject.SetActive(true);
         }
@@ -62,7 +64,13 @@ public class PlayerController : MonoBehaviour
 
             SetCountText();
         }
+        if (other.gameObject.CompareTag("LargePickUp"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 5;
 
+            SetCountText();
+        }
     }
 
 }

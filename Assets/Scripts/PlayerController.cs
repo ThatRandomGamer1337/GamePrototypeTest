@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 0;
     public TextMeshProUGUI countText;
-    public TextMeshProUGUI deathText;
+    public TextMeshProUGUI timerText;
     public GameObject winTextObject;
 
     private Rigidbody rb;
     private int count;
-    private int death;
+    private int timer;
     private float movementX;
     private float movementY;
 
@@ -24,8 +24,10 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+        timer = 0;
 
         SetCountText();
+        SetTimerText();
         winTextObject.SetActive(false);
     }
 
@@ -48,6 +50,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void SetTimerText()
+    {
+        timerText.text = "Time Taken: " + timer.ToString();
+        if(count >= 19)
+        {
+            timer = 99;
+        }
+    }
+
     void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
@@ -64,13 +75,24 @@ public class PlayerController : MonoBehaviour
 
             SetCountText();
         }
+        
         if (other.gameObject.CompareTag("LargePickUp"))
         {
             other.gameObject.SetActive(false);
             count = count + 5;
 
             SetCountText();
-        }
-    }
 
+        }
+        
+        if (other.gameObject.CompareTag("AntiPickUp"))
+        {
+                other.gameObject.SetActive(false);
+                count = count - 1;
+
+            SetCountText();
+
+        }
+        
+    }
 }

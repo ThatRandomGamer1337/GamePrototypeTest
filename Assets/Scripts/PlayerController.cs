@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Points: " + count.ToString();
-        if(count >= 19)
+        if(count >= 30)
         {
             winTextObject.SetActive(true);
         }
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     void SetTimerText()
     {
         timerText.text = "Time Taken: " + timer.ToString();
-        if(count >= 19)
+        if(count >= 30)
         {
             timer = 99;
         }
